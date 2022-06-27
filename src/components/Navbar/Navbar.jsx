@@ -1,4 +1,11 @@
-import { Box, Container, Heading, HStack, Link } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Heading,
+  HStack,
+  Link as LinkC,
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { paths } from '../../services/path';
 
@@ -7,11 +14,13 @@ export const Navbar = () => {
     <Box py={4}>
       <Container maxW="container.xl">
         <HStack justifyContent="space-between">
-          <Heading size="md" as={Link} href={paths.home}>
+          <Heading size="md" as={Link} to={paths.home}>
             Star Dev Chat
           </Heading>
           <HStack spacing={4}>
-            <Link href={paths.profile}>Profile</Link>
+            <LinkC as={Link} to={paths.profile}>
+              Profile
+            </LinkC>
           </HStack>
         </HStack>
       </Container>
