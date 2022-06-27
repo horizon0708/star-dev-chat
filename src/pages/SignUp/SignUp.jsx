@@ -23,6 +23,7 @@ export const SignUp = () => {
 
   return (
     <Center>
+      <div>Sign up</div>
       <Box p={8}>
         {loading ? (
           <Center>

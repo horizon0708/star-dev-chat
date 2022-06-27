@@ -14,9 +14,9 @@ function App() {
       <Navbar />
       <Layout>
         <Routes>
-          <Route path={paths.signUp} element={<SignUp />} />
           <Route path={paths.profile} element={<Profile />} />
           <Route path={paths.home} element={<Home />} />
+          <Route path={paths.signup} element={<SignUp />} />
         </Routes>
       </Layout>
     </ChakraProvider>
