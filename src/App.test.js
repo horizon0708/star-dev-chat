@@ -2,9 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
-import { Home } from './pages/Home/Home';
-import { SignIn } from './pages/SignIn/SignIn';
-import { SignUp } from './pages/SignUp/SignUp';
+
 
 describe('Navigation', () => {
   test('When profile link from nav bar is clicked, renders Profile page', () => {
@@ -32,11 +30,12 @@ describe('Navigation', () => {
 
   test('When sign in link from nav bar is clicked, renders Sign in page', () => {
     render( <MemoryRouter>
-      <App />
-    </MemoryRouter>,);
+      <App /> 
+    </MemoryRouter>,
+    );
     const signinButton = screen.getByText(/signin/i);
     userEvent.click(signinButton);
-    signinPageText=screen.getByText(/SignIn page/i);
+    const signinPageText = screen.getByText(/SignIn page/i); 
     expect(signinPageText).toBeInTheDocument();
   }); 
 
@@ -46,7 +45,7 @@ describe('Navigation', () => {
     </MemoryRouter>,);
     const signupButton = screen.getByText(/signup/i);
     userEvent.click(signupButton);
-    signupPageText=screen.getByText(/Sign up/i); 
+    const signupPageText = screen.getByText(/Sign up/i); 
     expect(signupPageText).toBeInTheDocument();
   });
 
@@ -56,9 +55,10 @@ describe('Navigation', () => {
     render( <MemoryRouter>
       <App />
     </MemoryRouter>,);
-    const homeButton = screen.getByText(/ /i);
+    const homeButton = screen.getByText(/home/i);
     userEvent.click(homeButton);
-    homePageText=screen.getByTestId('test-home');
-    expect(homePageText).toBeInTheDocument();
-  });
+    const  homePageText = screen.getByText(/home/i);
+    expect(homePageText).toBeInTheDocument();   
+  }); 
 });
+ 
