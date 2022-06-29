@@ -22,6 +22,7 @@ export const Navbar = () => {
               Profile 
             </LinkC>
             <Link as={Link} to={paths.signup}>Sign up</Link>
+            <Link as={Link} to={paths.signin}>Sign in</Link>
           </HStack>
         </HStack>
       </Container>
