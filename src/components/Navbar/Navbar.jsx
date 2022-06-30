@@ -21,8 +21,8 @@ export const Navbar = () => {
             <LinkC as={Link} to={paths.profile}>
               Profile 
             </LinkC>
-            <Link as={Link} to={paths.signup}>Sign up</Link>
-            <Link as={Link} to={paths.signin}>Sign in</Link>
+            <LinkC as={Link} to={paths.signup}>Sign up</LinkC>
+            <LinkC as={Link} to={paths.signin}>Sign in</LinkC>
           </HStack>
         </HStack>
       </Container>
