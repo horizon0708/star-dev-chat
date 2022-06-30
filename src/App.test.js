@@ -2,6 +2,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
+import { SignIn } from './pages/SignIn/SignIn';
+import { SignUp } from './pages/SignUp/SignUp';
+
 
 describe('Navigation', () => {
   test('When profile link from nav bar is clicked, renders Profile page', () => {
@@ -27,9 +30,37 @@ describe('Navigation', () => {
     expect(profilePageText).toBeInTheDocument();
   });
 
-  test('When sign in link from nav bar is clicked, renders Sign in page', () => {});
+  test('When sign in link from nav bar is clicked, renders Sign in page', () => {
+    render( <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+    );
+    const signinButton = screen.getByText(/sign in/i);
+    userEvent.click(signinButton);
+    const signinPageText = screen.getByText(/SignIn page/i); 
+    expect(signinPageText).toBeInTheDocument();
+  }); 
 
-  test('When sign up link from nav bar is clicked, renders Sign up page', () => {});
+  test('When sign up link from nav bar is clicked, renders Sign up page', () => {
+    render( <MemoryRouter>
+      <App />
+    </MemoryRouter>,); 
+    const signupButton = screen.getByText(/sign up/i);
+    userEvent.click(signupButton);
+    const signupPageText = screen.getByText(/Email address/i); 
+    expect(signupPageText).toBeInTheDocument(); 
+  });
 
-  test('When the logo from nav bar is clicked, renders Home page', () => {});
+  
+  
+  test('When the logo from nav bar is clicked, renders Home page', () => {
+    render( <MemoryRouter>
+      <App />
+    </MemoryRouter>,);
+    const homeButton = screen.getByText(/home/i);
+    userEvent.click(homeButton);
+    const  homePageText = screen.getByText(/home/i); 
+    expect(homePageText).toBeInTheDocument();   
+  }); 
 });
+ 

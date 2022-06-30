@@ -1,4 +1,4 @@
-import {
+ import {
   Box,
   Container,
   Heading,
@@ -14,13 +14,15 @@ export const Navbar = () => {
     <Box py={4}>
       <Container maxW="container.xl">
         <HStack justifyContent="space-between">
-          <Heading size="md" as={Link} to={paths.home}>
+          <Heading id='test-home' size="md" as={Link} to={paths.home}>
             Star Dev Chat
           </Heading>
           <HStack spacing={4}>
             <LinkC as={Link} to={paths.profile}>
-              Profile
+              Profile 
             </LinkC>
+            <Link as={Link} to={paths.signup}>Sign up</Link>
+            <Link as={Link} to={paths.signin}>Sign in</Link>
           </HStack>
         </HStack>
       </Container>

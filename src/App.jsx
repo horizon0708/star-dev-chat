@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import { paths } from './services/path';
 import { Home } from './pages/Home/Home';
 import { Profile } from './pages/Profile/Profile';
+import {SignIn} from './pages/SignIn/SignIn';
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
       <Navbar />
       <Layout>
         <Routes>
-          <Route path={paths.signUp} element={<SignUp />} />
           <Route path={paths.profile} element={<Profile />} />
           <Route path={paths.home} element={<Home />} />
+          <Route path={paths.signup} element={<SignUp />} />
+          <Route path={paths.signin} element={<SignIn />} />
         </Routes>
       </Layout>
     </ChakraProvider>
