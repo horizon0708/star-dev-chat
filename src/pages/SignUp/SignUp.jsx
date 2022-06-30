@@ -58,7 +58,7 @@ export const SignUp = () => {
               )}
             </FormControl>
             <Button type="submit" width="100%">
-              SignUp
+              Sign Up
             </Button>  
           </form>
         )}

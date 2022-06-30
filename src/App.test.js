@@ -31,17 +31,21 @@ describe('Navigation', () => {
   });
 
   test('When sign in link from nav bar is clicked, renders Sign in page', () => {
-    render( <SignIn/>,
+    render( <MemoryRouter>
+      <App />
+    </MemoryRouter>,
     );
-    const signinButton = screen.getByText(/signin/i);
+    const signinButton = screen.getByText(/sign in/i);
     userEvent.click(signinButton);
     const signinPageText = screen.getByText(/SignIn page/i); 
     expect(signinPageText).toBeInTheDocument();
   }); 
 
   test('When sign up link from nav bar is clicked, renders Sign up page', () => {
-    render( <SignUp/>,); 
-    const signupButton = screen.getByText(/signup/i);
+    render( <MemoryRouter>
+      <App />
+    </MemoryRouter>,); 
+    const signupButton = screen.getByText(/sign up/i);
     userEvent.click(signupButton);
     const signupPageText = screen.getByText(/Email address/i); 
     expect(signupPageText).toBeInTheDocument(); 
