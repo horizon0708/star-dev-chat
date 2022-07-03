@@ -51,6 +51,10 @@ export const SignUp = () => {
                 type="password"
                 {...register('password', {
                   required: 'Password is required to sign up',
+                  minLength: {
+                    value: 8,
+                    message: 'Password must be longer than 8 letters!',
+                  },
                 })}
               />
               {errors.password && (
@@ -59,7 +63,7 @@ export const SignUp = () => {
             </FormControl>
             <Button type="submit" width="100%">
               Sign Up
-            </Button>  
+            </Button>
           </form>
         )}
       </Box>
