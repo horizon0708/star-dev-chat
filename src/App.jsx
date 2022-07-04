@@ -8,6 +8,7 @@ import { paths } from './services/path';
 import { Home } from './pages/Home/Home';
 import { Profile } from './pages/Profile/Profile';
 import {SignIn} from './pages/SignIn/SignIn';
+import PrivateRoutes from './services/PrivateRoutes';
 
 function App() {
   return (
@@ -15,8 +16,10 @@ function App() {
       <Navbar />
       <Layout>
         <Routes>
-          <Route path={paths.profile} element={<Profile />} />
-          <Route path={paths.home} element={<Home />} />
+          <Route element={<PrivateRoutes/>}>
+               <Route path={paths.home} element={<Home />}  exact/>
+               <Route path={paths.profile} element={<Profile />} exact/>
+          </Route>          
           <Route path={paths.signup} element={<SignUp />} />
           <Route path={paths.signin} element={<SignIn />} />
         </Routes>
