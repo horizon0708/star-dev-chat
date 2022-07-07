@@ -8,8 +8,11 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { paths } from '../../services/path';
+import { useSignUp } from '../../pages/SignUp/services/SignUp.Hooks';
 
 export const Navbar = () => {
+  const navbar = useSignUp();
+  console.log(navbar);
   return (
     <Box py={4}>
       <Container maxW="container.xl">
@@ -21,7 +24,7 @@ export const Navbar = () => {
             <LinkC as={Link} to={paths.profile}>
               Profile 
             </LinkC>
-            <LinkC as={Link} to={paths.signup}>Sign up</LinkC>
+           {navbar && <LinkC as={Link} to={paths.signup}>Sign up</LinkC>}
             <LinkC as={Link} to={paths.signin}>Sign in</LinkC>
           </HStack>
         </HStack>
