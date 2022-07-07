@@ -13,7 +13,6 @@ import { supabase } from '../../services/supabaseClient';
 export const Navbar = () => {
 
   const user = supabase.auth.user();
-   console.log(user);
    
   return (
     <Box py={4}>
