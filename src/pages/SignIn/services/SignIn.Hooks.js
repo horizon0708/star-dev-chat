@@ -2,10 +2,11 @@ import {useState} from 'react';
 import { useToast } from '@chakra-ui/react';
 import { supabase } from '../../../services/supabaseClient';
 import { useNavigate } from 'react-router-dom';
+import {paths} from '../../../services/path';
 
 export const useSignIn = () => {
      
-    const history =useNavigate();
+    const navigate =useNavigate();
 
     const [loading,setLoading]=useState(false);
     const toast=useToast();
@@ -14,17 +15,13 @@ export const useSignIn = () => {
           try {
             setLoading(true);
             const { error } = await supabase.auth.signIn({ email, password });
-            if (error){
-              alert('error signin ')
-              // history('/signup')
-            }else {
-                history('/')
-            }
+            if (error) throw error;
             toast({
               status: 'success',
               title: 'Sign In success',
               description: 'Start a Chat',
             });
+            navigate(paths.home)
             setLoading(false);
           } catch (error) {
             toast({
