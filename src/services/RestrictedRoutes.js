@@ -7,7 +7,7 @@ const RestrictedRoutes = () => {
     let user = supabase.auth.user();
 
     return (
-        !user ? <Outlet/> : <Navigate to = {paths.home}/>
+        !user ? <Outlet/> : <Navigate to = {paths.home}/> 
 
     );
 };

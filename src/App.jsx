@@ -15,7 +15,7 @@ import RestrictedRoutes from './services/RestrictedRoutes';
 function App() {
   return (
     <ChakraProvider>
-      <Navbar />
+      <Navbar /> 
       <Layout>
         <Routes>
           <Route element={<PrivateRoutes/>}>
