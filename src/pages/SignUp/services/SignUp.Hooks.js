@@ -6,7 +6,6 @@ import { paths } from '../../../services/path';
 
 export const useSignUp = () => {
   const [loading, setLoading] = useState(false);
-
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -22,7 +21,7 @@ export const useSignUp = () => {
           title: 'Sign up success',
           description: 'Check your mailbox!',
         });
-        navigate(paths.home);
+        navigate(paths.signin);
         setLoading(false);
       } catch (error) {
         toast({
