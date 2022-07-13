@@ -19,16 +19,15 @@ function App() {
       <Layout>
         <Routes>
           <Route element={<PrivateRoutes/>}>
-          <Route path={paths.profile} element={<Profile />} />
-          <Route path={paths.home} element={<Home />} />
-          <Route path={paths.signout} element={<SignOut/>} />
-          <Route path="/*" element={<Navigate to={paths.home}/>} />
+           <Route path={paths.profile} element={<Profile />} />
+           <Route path={paths.home} element={<Home />} />
+           <Route path={paths.signout} element={<SignOut/>} />
+           <Route path="/*" element={<Navigate to={paths.home}/>} />
           </Route>
-          <Route element={<RestrictedRoutes/>}>
-          <Route path={paths.signup} element={<SignUp />} />
-          <Route path={paths.signin} element={<SignIn />} />
-          <Route path="/*" element={<Navigate to={paths.signin}/>} />
-
+           <Route element={<RestrictedRoutes/>}>
+           <Route path={paths.signup} element={<SignUp />} />
+           <Route path={paths.signin} element={<SignIn />} />
+           <Route path="/*" element={<Navigate to={paths.signin}/>} />
           </Route>
         </Routes>
       </Layout>
