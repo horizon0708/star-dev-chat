@@ -1,36 +1,24 @@
 import { supabase } from '../../services/supabaseClient';
 import React  from 'react';
-
+import { useToast } from '@chakra-ui/react';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { paths } from '../../services/path';
 
-export default function Logout() {
-  const navigate = useNavigate();
-   useEffect(()=>{
-       const initialize = async () => await supabase.auth.signOut()
-       initialize()
-       navigate(paths.signin)
-    
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-        async (event, session)=>{
-            console.log("this")
-            const body = JSON.stringify({event, session})
-            const headers = new Headers ({'Content-Type':'application/json'})
+export default function SignOut() {
+    const toast = useToast();
+    const navigate = useNavigate();
 
-            await fetch ('/api/login', {
-                method: 'post',
-                body,
-                headers,
-                credentials: 'same-origin',
-            })
-            console.log("out")
-        }
-        )
-        return ()=>{
-            authListener.unsubscribe();
-        }
-    }
+   useEffect(()=>{
+    supabase.auth.signOut().then(() => {
+        navigate(paths.signin);
+    })
+    toast({
+        status: 'success',
+        title: 'Sign out success',
+        description: 'Sign In again!',
+      });
+   }
    ,[])
 
 return <> 

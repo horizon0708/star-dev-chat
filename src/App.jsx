@@ -18,11 +18,11 @@ function App() {
       <Navbar />
       <Layout>
         <Routes>
+           <Route path={paths.home} element={<Home />} />
+           <Route path="/*" element={<Navigate to={paths.home}/>} />
           <Route element={<PrivateRoutes/>}>
            <Route path={paths.profile} element={<Profile />} />
-           <Route path={paths.home} element={<Home />} />
            <Route path={paths.signout} element={<SignOut/>} />
-           <Route path="/*" element={<Navigate to={paths.home}/>} />
           </Route>
            <Route element={<RestrictedRoutes/>}>
            <Route path={paths.signup} element={<SignUp />} />
