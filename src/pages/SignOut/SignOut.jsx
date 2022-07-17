@@ -15,7 +15,7 @@ export default function SignOut() {
     })
     toast({
         status: 'success',
-        title: 'Sign out success',
+        title: 'Logged out',
         description: 'Sign In again!',
       });
    }
