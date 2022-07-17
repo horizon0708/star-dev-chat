@@ -21,9 +21,12 @@ export const Navbar = () => {
             Star Dev Chat
           </Heading>
           <HStack spacing={4}>
+            {user && (
             <LinkC as={Link} to={paths.profile}>
               Profile
-            </LinkC>
+            </LinkC>)}
+            {user && (
+            <LinkC as={Link} to={paths.signout} >Sign out</LinkC>)}
             {!user && (
               <LinkC as={Link} to={paths.signup}>
                 Sign up
