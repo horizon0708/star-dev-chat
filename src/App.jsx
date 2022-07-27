@@ -11,9 +11,11 @@ import {SignIn} from './pages/SignIn/SignIn';
 import SignOut from './pages/SignOut/SignOut';
 import PrivateRoutes from './services/PrivateRoutes';
 import RestrictedRoutes from './services/RestrictedRoutes';
+import {AuthProvider} from './services/Auth';
 
 function App() {
   return (
+    <AuthProvider>
     <ChakraProvider>
       <Navbar />
       <Layout>
@@ -32,6 +34,7 @@ function App() {
         </Routes>
       </Layout>
     </ChakraProvider>
+    </AuthProvider>
   );
 }
 
