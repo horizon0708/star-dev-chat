@@ -15,7 +15,7 @@ import {AuthProvider} from './services/Auth';
 
 function App() {
   return (
-    <AuthProvider>
+  <AuthProvider>
     <ChakraProvider>
       <Navbar />
       <Layout>
@@ -34,7 +34,7 @@ function App() {
         </Routes>
       </Layout>
     </ChakraProvider>
-    </AuthProvider>
+   </AuthProvider>
   );
 }
 
