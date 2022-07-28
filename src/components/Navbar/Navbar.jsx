@@ -8,11 +8,11 @@ import {
 import { Link } from 'react-router-dom';
 import React, {useContext} from 'react';
 import { paths } from '../../services/path';
-import { AuthProvider } from '../../services/Auth';
+import { AuthContext } from '../../services/Auth';
 
 export const Navbar = () => {
 
-   const user = useContext(AuthProvider)
+   const user = useContext(AuthContext);
 
   return (
     <Box py={4}>
