@@ -6,12 +6,13 @@ import {
   Link as LinkC,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, {useContext} from 'react';
 import { paths } from '../../services/path';
-import { supabase } from '../../services/supabaseClient';
+import { AuthContext } from '../../services/Auth';
 
 export const Navbar = () => {
-  const user = supabase.auth.user();
+
+   const user = useContext(AuthContext);
 
   return (
     <Box py={4}>
