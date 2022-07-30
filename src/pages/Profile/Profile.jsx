@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../services/Auth';
 import { supabase } from '../../services/supabaseClient';
 import {Box, Center, FormLabel, Input, Button, Spinner} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { paths } from '../../services/path'; 
 
 
 export const Profile = ({session}) => {
@@ -81,8 +83,14 @@ export const Profile = ({session}) => {
                   />
                 </Box>
                 <Button p={6} mt={6} type="submit" width="100%" disabled= {loading}>
-              Update Profile
-            </Button>
+                  Update Profile
+                </Button>
+                <Center mt={6}>
+                <Link  to={paths.signout}>
+                    Sign Out
+                 </Link>
+                </Center>
+
               </form>)}
               </Box>
               </Center>   
