@@ -4,42 +4,41 @@ import { supabase } from '../../services/supabaseClient';
 import {Box, Center, FormLabel, Input, Button, Spinner} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { paths } from '../../services/path'; 
+import { useToast } from '@chakra-ui/react';
 
 
 export const Profile = ({session}) => {
   const user = useContext(AuthContext);
   const [ loading, setLoading ] = useState(true);
   const [ username, setUsername ] = useState(null);
+  const toast = useToast();
 
   useEffect (()=>{
     setProfile()
   },[session])
 
-  const setProfile = async () => {
-   
+  const setProfile = async () => {   
     try {
       setLoading(true)
       let { data, error } = await supabase
        .from('UserProfiles')
        .select('*')
-       .range(0, 3)
        .eq('user_id', user.id)
-       .single()
-       console.log(data)
-    
-       if ( data ){
-        setUsername(data.username.charAt(0).toUpperCase()+ data.username.slice(1))
+       .single()   
+       if ( data ){        
+        setUsername(data.username); 
        }
        } catch (error){
         alert(error.message)
        }
        finally {
            setLoading(false)
-       }
+       }    
   }
  
   const updateProfile = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
+    if(username.length>=5 && username.length<=15){
       try {
       setLoading(true)
       const updates = {
@@ -49,8 +48,8 @@ export const Profile = ({session}) => {
       }
       const { data, error } = await supabase
       .from('UserProfiles')
-       .update({ username: 'username' })
-       .eq('username', 'data.username')
+       .update({ username })
+       .match({'user_id': user.id})
       if (error){
         throw error
       }
@@ -60,7 +59,19 @@ export const Profile = ({session}) => {
     finally {
       setLoading(false)
     }
+    toast({
+      status: 'success',
+      title: 'Profile update',
+      description: 'Your Profile was updated successfully!',
+    });
+  }else{
+    toast({
+      title: 'An error occurred.',
+      description: 'Unable to update your username, make sure you inter between 5 to 15 characters',
+      status: 'error',
+    })
   }
+}
 
 
   return <div>
@@ -78,21 +89,21 @@ export const Profile = ({session}) => {
                   <Input
                   id="username"
                   type="text"
+                  autoComplete = "off"
                   value={username || ''}
                   onChange={event=>{setUsername(event.target.value)}}
                   />
                 </Box>
-                <Button p={6} mt={6} type="submit" width="100%" disabled= {loading}>
-                  Update Profile
-                </Button>
-                <Center mt={6}>
-                <Link  to={paths.signout}>
+                  <Button p={6} mt={6} type="submit" width="100%" disabled= {loading}>
+                    Update Profile
+                  </Button>
+                  <Center mt={6}>
+                   <Link  to={paths.signout}>
                     Sign Out
-                 </Link>
-                </Center>
-
+                   </Link>
+                  </Center>
               </form>)}
-              </Box>
+             </Box>
               </Center>   
     </div>;
 };
