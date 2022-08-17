@@ -14,9 +14,12 @@ import { useSignIn } from './services/SignIn.Hooks';
 import { useForm } from 'react-hook-form';
 
 export const SignIn = () => {
-  
   const { signIn, loading } = useSignIn();
-  const { register, handleSubmit, formState: { errors }} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   return (
     <Center>
@@ -56,7 +59,7 @@ export const SignIn = () => {
             </FormControl>
             <Button type="submit" width="100%">
               Sign In
-            </Button>  
+            </Button>
           </form>
         )}
       </Box>

@@ -6,13 +6,12 @@ import {
   Link as LinkC,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { paths } from '../../services/path';
 import { AuthContext } from '../../services/Auth';
 
 export const Navbar = () => {
-
-   const user = useContext(AuthContext);
+  const user = useContext(AuthContext);
 
   return (
     <Box py={4}>
@@ -23,11 +22,15 @@ export const Navbar = () => {
           </Heading>
           <HStack spacing={4}>
             {user && (
-            <LinkC as={Link} to={paths.profile}>
-              Profile
-            </LinkC>)}
+              <LinkC as={Link} to={paths.profile}>
+                Profile
+              </LinkC>
+            )}
             {user && (
-            <LinkC as={Link} to={paths.signout} >Sign out</LinkC>)}
+              <LinkC as={Link} to={paths.signout}>
+                Sign out
+              </LinkC>
+            )}
             {!user && (
               <LinkC as={Link} to={paths.signup}>
                 Sign up
