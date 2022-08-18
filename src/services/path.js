@@ -4,4 +4,5 @@ export const paths = {
   signup: '/signup',
   signin: '/signin',
   signout: '/signout',
+  chat: '/chat',
 };

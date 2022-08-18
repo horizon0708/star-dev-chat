@@ -12,6 +12,7 @@ import SignOut from './pages/SignOut/SignOut';
 import PrivateRoutes from './services/PrivateRoutes';
 import RestrictedRoutes from './services/RestrictedRoutes';
 import { AuthProvider } from './services/Auth';
+import { Chat } from './pages/Chat/Chat';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route element={<PrivateRoutes />}>
               <Route path={paths.profile} element={<Profile />} />
               <Route path={paths.signout} element={<SignOut />} />
+              <Route path={paths.chat} element={<Chat />} />
             </Route>
             <Route element={<RestrictedRoutes />}>
               <Route path={paths.signup} element={<SignUp />} />
