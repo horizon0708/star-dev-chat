@@ -5,6 +5,8 @@ import React, {
   useState,
   createContext,
 } from 'react';
+import { supabase } from '../../../../services/supabaseClient';
+import { Channels } from './Channels';
 
 const ChannelContext = createContext({
   channels: [],
@@ -18,14 +20,35 @@ export const ChannelContextProvider = ({ children }) => {
     },
   ]);
 
+
   useEffect(() => {
     //get and set channels using supabase subscription
-  }, []);
+    const sendName = async (channelName) =>
+    {
+      let { data: Channels, error } = await supabase
+   .from('Channels')
+   .select('title, id')
+    setChannels([...Object.values(Channels)])
+    }
+    sendName()
 
-  const addChannel = useCallback((channelName) => {
+  // const Channels = supabase
+  // .from('Channels')
+  // .on('*', payload => {
+  //   console.log('Change received!', payload)
+  // })
+  // .subscribe()
+  }, [Channels]);
+
+
+  const addChannel = useCallback( async (channelName)  => {
     console.log('addChannel', channelName);
-    // add channel to supabase
-  });
+    
+    const { data, error } = await supabase
+      .from('Channels')
+      .insert([{ title: channelName }]);
+
+ });
 
   const joinChannel = useCallback((channelId) => {
     console.log('joinChannel', channelId);
