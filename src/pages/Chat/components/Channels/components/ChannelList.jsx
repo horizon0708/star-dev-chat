@@ -2,17 +2,17 @@ import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { useChannelContext } from '../Channels.Context';
 import { Flex, VStack } from '@chakra-ui/react';
+import { AuthContext } from '../../../../../services/Auth';
 
 export const ChannelList = () => {
   const { channels, joinChannel } = useChannelContext();
-  console.log(channels)
   return (
     <Flex my={4}>
       <VStack>
 
-      {channels.map(({ id, title }) => {
+      {channels.map(({ id, title}) => {
         return (
-          <Button key={id} id={id} onClick={() => joinChannel(id)} width="100%">
+          <Button key={id} id={id} onClick={() => joinChannel(id)} width="100%" >
             {title}
           </Button>
         );

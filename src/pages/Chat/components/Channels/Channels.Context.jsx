@@ -19,41 +19,73 @@ export const ChannelContextProvider = ({ children }) => {
       name: 'mock channel',
     },
   ]);
+  const [selectedChannel, setSelectedChannel] = useState(null);
+  const [users, setUsers] = useState([]);
 
+  const fetchChannels = async () => {
+    // fetch and sets channels
+    let { data, error } = await supabase.from('Channels').select(`
+    *,
+      ChannelUserProfile ( * )
+    `);
+
+    if (!data) {
+      return;
+    }
+    console.log(data);
+    setChannels(data)
+  };
 
   useEffect(() => {
-    //get and set channels using supabase subscription
-    const sendName = async (channelName) =>
-    {
-      let { data: Channels, error } = await supabase
-   .from('Channels')
-   .select('title, id')
-    setChannels([...Object.values(Channels)])
+    if (!selectedChannel) {
+      return;
     }
-    sendName()
 
-  // const Channels = supabase
-  // .from('Channels')
-  // .on('*', payload => {
-  //   console.log('Change received!', payload)
-  // })
-  // .subscribe()
-  }, [Channels]);
+    const userProfileIds = selectedChannel.ChannelUserProfile.map((x) => x.userprofile_id);
+    console.log(userProfileIds);
+    fetchUsers(userProfileIds);
+  }, [selectedChannel]);
 
+  const fetchUsers = async (userIds) => {
+    // fetch and sets channels
+    let { data, error } = await supabase
+      .from('UserProfiles')
+      .select(
+        `
+          *
+        `,
+      )
+      .in({ id: userIds });
 
-  const addChannel = useCallback( async (channelName)  => {
+    if (!data) {
+      return [];
+    }
+
+    setUsers(data);
+  };
+
+  useEffect(() => {
+    // get and set channels using supabase subscription
+    fetchChannels();
+  }, []);
+
+  const addChannel = useCallback(async (channelName) => {
     console.log('addChannel', channelName);
-    
+
     const { data, error } = await supabase
       .from('Channels')
       .insert([{ title: channelName }]);
 
- });
+    await fetchChannels();
+  });
 
-  const joinChannel = useCallback((channelId) => {
+  const joinChannel = useCallback(async (channelId) => {
     console.log('joinChannel', channelId);
     // leave the current channel
     // join a user to new channel
+    const { data, error } = await supabase
+      .from('ChannelUserProfile')
+      .insert({ userprofile_id: 2, channel_id: channelId, role: 'admin' });
   });
 
   return (
@@ -62,6 +94,8 @@ export const ChannelContextProvider = ({ children }) => {
         channels,
         addChannel,
         joinChannel,
+        users,
+        setSelectedChannel,
       }}>
       {children}
     </ChannelContext.Provider>
