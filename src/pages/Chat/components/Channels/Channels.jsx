@@ -4,6 +4,7 @@ import { Box, Heading } from '@chakra-ui/react';
 import { AddChannelButton } from './components/AddChannelButton';
 import { ChannelList } from './components/ChannelList';
 
+
 export const Channels = ({ ...props }) => {
   return (
     <ChannelContextProvider>
