@@ -7,10 +7,13 @@ import React, {
 } from 'react';
 import { supabase } from '../../../../services/supabaseClient';
 import { Channels } from './Channels';
+import {
+  useChannelUsers,
+  useJoinChannel,
+  useUserProfile,
+} from './Channels.Hooks';
 
-const ChannelContext = createContext({
-  channels: [],
-});
+const ChannelContext = createContext();
 
 export const ChannelContextProvider = ({ children }) => {
   const [channels, setChannels] = useState([
@@ -19,8 +22,10 @@ export const ChannelContextProvider = ({ children }) => {
       name: 'mock channel',
     },
   ]);
-  const [selectedChannel, setSelectedChannel] = useState(null);
-  const [users, setUsers] = useState([]);
+
+  const userProfile = useUserProfile();
+  const [selectedChannelId, joinChannel] = useJoinChannel(userProfile?.id);
+  const users = useChannelUsers(selectedChannelId);
 
   const fetchChannels = async () => {
     // fetch and sets channels
@@ -32,36 +37,7 @@ export const ChannelContextProvider = ({ children }) => {
     if (!data) {
       return;
     }
-    console.log(data);
-    setChannels(data)
-  };
-
-  useEffect(() => {
-    if (!selectedChannel) {
-      return;
-    }
-
-    const userProfileIds = selectedChannel.ChannelUserProfile.map((x) => x.userprofile_id);
-    console.log(userProfileIds);
-    fetchUsers(userProfileIds);
-  }, [selectedChannel]);
-
-  const fetchUsers = async (userIds) => {
-    // fetch and sets channels
-    let { data, error } = await supabase
-      .from('UserProfiles')
-      .select(
-        `
-          *
-        `,
-      )
-      .in({ id: userIds });
-
-    if (!data) {
-      return [];
-    }
-
-    setUsers(data);
+    setChannels(data);
   };
 
   useEffect(() => {
@@ -79,15 +55,6 @@ export const ChannelContextProvider = ({ children }) => {
     await fetchChannels();
   });
 
-  const joinChannel = useCallback(async (channelId) => {
-    console.log('joinChannel', channelId);
-    // leave the current channel
-    // join a user to new channel
-    const { data, error } = await supabase
-      .from('ChannelUserProfile')
-      .insert({ userprofile_id: 2, channel_id: channelId, role: 'admin' });
-  });
-
   return (
     <ChannelContext.Provider
       value={{
@@ -95,7 +62,6 @@ export const ChannelContextProvider = ({ children }) => {
         addChannel,
         joinChannel,
         users,
-        setSelectedChannel,
       }}>
       {children}
     </ChannelContext.Provider>
